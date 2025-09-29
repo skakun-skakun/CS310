@@ -1,0 +1,36 @@
+CREATE DATABASE IF NOT EXISTS HW1;
+USE HW1;
+
+DROP TABLE IF EXISTS player;
+DROP TABLE IF EXISTS player_profile_picture;
+DROP TABLE IF EXISTS game_type;
+DROP TABLE IF EXISTS game;
+DROP TABLE IF EXISTS game_player;
+
+CREATE TABLE IF NOT EXISTS player (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    networth INT
+);
+
+CREATE TABLE IF NOT EXISTS player_profile_picture (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    player_id INT,
+    picture_url VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS game_type (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS game (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    game_type_id INT
+);
+
+CREATE TABLE IF NOT EXISTS game_player (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    game_id INT,
+    player_id INT
+);
