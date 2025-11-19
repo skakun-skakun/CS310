@@ -1,71 +1,71 @@
-CREATE database wiki;
-USE wiki;
-DROP TABLE users_clean;
-DROP TABLE articles_clean;
-DROP TABLE donations_clean;
-DROP TABLE article_analysis;
+-- CREATE SCHEMA demo;
+
+DROP TABLE IF EXISTS demo.users_clean;
+DROP TABLE IF EXISTS demo.articles_clean;
+DROP TABLE IF EXISTS demo.donations_clean;
+DROP TABLE IF EXISTS demo.article_analysis;
 
 
-CREATE TABLE users_clean (
-    user_id INT PRIMARY KEY,
-    name VARCHAR(50),
-    email VARCHAR(50),
-    nickname VARCHAR(50),
-    credibility_score DECIMAL(5,2)
+CREATE TABLE demo.users_clean (
+    user_id INT,
+    name STRING,
+    email STRING,
+    nickname STRING,
+    credibility_score NUMERIC
 );
 
-INSERT INTO users_clean (user_id, name, email, nickname, credibility_score)
+INSERT INTO demo.users_clean (user_id, name, email, nickname, credibility_score)
 SELECT
-    CAST(id AS UNSIGNED) AS user_id,
+    CAST(id AS INT64) AS user_id,
     TRIM(name),
     TRIM(email),
     TRIM(nickname),
-    IF(credibility_scores < 0 or credibility_scores > 100, NULL, CAST(credibility_scores AS DECIMAL(5,2)))
-from users;
+    IF(credibility_scores < 0 or credibility_scores > 100, NULL, CAST(credibility_scores AS NUMERIC))
+from demo.users;
 
-CREATE TABLE articles_clean (
-article_id INT PRIMARY KEY auto_increment,
-title VARCHAR(250),
-nickname VARCHAR(50),
+CREATE TABLE demo.articles_clean (
+article_id INT,
+title STRING,
+nickname STRING,
 likes INT,
 dislikes INT,
 publish_date datetime,
-url VARCHAR(250),
+url STRING,
 views INT
 );
 
-INSERT INTO articles_clean (title, nickname, likes, dislikes, publish_date, url, views)
+INSERT INTO demo.articles_clean (title, nickname, likes, dislikes, publish_date, url, views)
 SELECT
 TRIM(title),
 TRIM(user_nickname),
-CAST(likes as unsigned),
-CAST(not_likes as unsigned),
+CAST(likes as INT64),
+CAST(not_likes as INT64),
 CAST(publish_date as datetime),
 TRIM(url),
 FLOOR(views)
-From articles;
+From demo.articles;
 
-CREATE TABLE donations_clean (
-donation_id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE demo.donations_clean (
+donation_id INT,
 article_id INT,
-article_name varchar(250),
-donation_amount DECIMAL(5, 2),
+article_name STRING,
+donation_amount NUMERIC,
 donation_date datetime,
 FOREIGN KEY (article_id) REFERENCES articles_clean(article_id)
 );
 
-INSERT into donations_clean(article_id, article_name, donation_amount, donation_date)
+INSERT into demo.donations_clean(article_id, article_name, donation_amount, donation_date)
 SELECT
 a.article_id,
 trim(d.article),
-CAST(d.donation_amount as  DECIMAL(5, 2)),
+CAST(d.donation_amount as  NUMERIC),
 CAST(d.donation_date as datetime)
-From donations d
+From demo.donations d
 LEFT JOIN articles_clean a on trim(d.article)=trim(a.title);
 
 select * from donations_clean;
 
-CREATE TABLE article_analysis AS
+CREATE TABLE demo.article_analysis AS
 SELECT
 a.article_id,
 a.title,
@@ -82,5 +82,4 @@ LEFT JOIN donations_clean d on a.article_id = d.article_id
 GROUP BY article_id;
 
 
-SELECT * FROM article_analysis;
-
+SELECT * FROM demo.article_analysis;
