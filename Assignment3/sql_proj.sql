@@ -34,15 +34,16 @@ url STRING,
 views INT
 );
 
-INSERT INTO demo.articles_clean (title, nickname, likes, dislikes, publish_date, url, views)
+INSERT INTO demo.articles_clean (article_id, title, nickname, likes, dislikes, publish_date, url, views)
 SELECT
-TRIM(title),
+ROW_NUMBER() OVER() AS article_id,
+TRIM(` title`) AS title,
 TRIM(user_nickname),
-CAST(likes as INT64),
-CAST(not_likes as INT64),
-CAST(publish_date as datetime),
-TRIM(url),
-FLOOR(views)
+CAST(` likes` as INT64),
+CAST(` not_likes` as INT64),
+CAST(` publish_date` as datetime),
+TRIM(` url`),
+CAST(FLOOR(` views`) AS INT64)
 From demo.articles;
 
 CREATE TABLE demo.donations_clean (
@@ -50,8 +51,7 @@ donation_id INT,
 article_id INT,
 article_name STRING,
 donation_amount NUMERIC,
-donation_date datetime,
-FOREIGN KEY (article_id) REFERENCES articles_clean(article_id)
+donation_date datetime
 );
 
 INSERT into demo.donations_clean(article_id, article_name, donation_amount, donation_date)
@@ -61,9 +61,9 @@ trim(d.article),
 CAST(d.donation_amount as  NUMERIC),
 CAST(d.donation_date as datetime)
 From demo.donations d
-LEFT JOIN articles_clean a on trim(d.article)=trim(a.title);
+LEFT JOIN demo.articles_clean a on trim(d.article)=trim(a.title);
 
-select * from donations_clean;
+select * from demo.donations_clean;
 
 CREATE TABLE demo.article_analysis AS
 SELECT
@@ -74,12 +74,12 @@ a.dislikes,
 a.nickname as author,
 u.credibility_score as author_credibility_score,
 u.email as author_email,
-IF(ISNULL(sum(d.donation_amount)), 0, sum(d.donation_amount)) as total_donation, 
+IFNULL(sum(d.donation_amount), 0) as total_donation, 
 max(d.donation_date) as latest_donation_date
-from articles_clean a
-LEFT JOIN users_clean u on a.nickname = u.nickname
-LEFT JOIN donations_clean d on a.article_id = d.article_id
-GROUP BY article_id;
+from demo.articles_clean a
+LEFT JOIN demo.users_clean u on a.nickname = u.nickname
+LEFT JOIN demo.donations_clean d on a.article_id = d.article_id
+GROUP BY article_id, title, likes, dislikes, author, author_credibility_score, author_email;
 
 
 SELECT * FROM demo.article_analysis;
