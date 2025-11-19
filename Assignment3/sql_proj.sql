@@ -79,7 +79,8 @@ max(d.donation_date) as latest_donation_date
 from demo.articles_clean a
 LEFT JOIN demo.users_clean u on a.nickname = u.nickname
 LEFT JOIN demo.donations_clean d on a.article_id = d.article_id
-GROUP BY article_id, title, likes, dislikes, author, author_credibility_score, author_email;
+GROUP BY article_id, title, likes, dislikes, author, author_credibility_score, author_email
+HAVING latest_donation_date IS NOT NULL;
 
 
 SELECT * FROM demo.article_analysis;
