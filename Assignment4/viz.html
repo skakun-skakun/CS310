@@ -1,0 +1,458 @@
+<!doctype html>
+<html>
+<head>
+    <title>Vega-Lite Bar Chart - Skakun Ostap</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.0.2"></script>
+
+    <style media="screen">
+        /* Add space between Vega-Embed links  */
+        .vega-actions a {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<!-- Container for the visualization -->
+<div id="vis1"></div>
+<div id="vis2"></div>
+<div id="vis3"></div>
+<div id="vis4"></div>
+
+<script>
+    // Assign the specification to a local variable vlSpec.
+    const v1 = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+        "description": "A simple bar chart with embedded data.",
+        "data": {
+            "values": [
+                {
+                    "game_id": 989580,
+                    "name": "Kamimachi Site - Dating story",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 984720,
+                    "name": "Hentai Summer",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 971998,
+                    "name": "Among Us - MIRA HQ Map",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 971925,
+                    "name": "Among Us - Polus Map",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 953490,
+                    "name": "CARRION",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 946430,
+                    "name": "Among Us - Hamster Pet Bundle",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 94000,
+                    "name": "Dinner Date",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 904320,
+                    "name": "My Holiday",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 838330,
+                    "name": "Warlords Awakening",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 814540,
+                    "name": "Changed",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 697630,
+                    "name": "WARMA",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 687650,
+                    "name": "辣条杂货店:令人感动的穿越时光回到童年，中国小贩逆袭人生故事剧情，经典策略模拟经营休闲养成竞技娱乐独立游戏",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 669330,
+                    "name": "Mechabellum",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 627270,
+                    "name": "Injustice™ 2",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 582010,
+                    "name": "Monster Hunter: World",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 545270,
+                    "name": "NBA Playgrounds",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 534380,
+                    "name": "Dying Light 2: Reloaded Edition",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 530711,
+                    "name": "Dead by Daylight - The Halloween Chapter",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 530540,
+                    "name": "mr.President Prologue Episode",
+                    "reviews_count": 100
+                },
+                {
+                    "game_id": 517130,
+                    "name": "Soundboxing",
+                    "reviews_count": 100
+                }
+            ]
+        },
+        "mark": "bar",
+        "encoding": {
+            "y": {"field": "name", "type": "nominal"},
+            "x": {"field": "reviews_count", "type": "quantitative"}
+        }
+    }
+
+
+    const v2 = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+        "description": "A simple bar chart with embedded data.",
+        "data": {
+            "values": [
+                {
+                    "release_year": "2025",
+                    "repeats": 15063
+                },
+                {
+                    "release_year": "2024",
+                    "repeats": 12588
+                },
+                {
+                    "release_year": "",
+                    "repeats": 12585
+                },
+                {
+                    "release_year": "2022",
+                    "repeats": 8262
+                },
+                {
+                    "release_year": "2023",
+                    "repeats": 8185
+                },
+                {
+                    "release_year": "2021",
+                    "repeats": 7979
+                },
+                {
+                    "release_year": "2019",
+                    "repeats": 6103
+                },
+                {
+                    "release_year": "2020",
+                    "repeats": 6054
+                },
+                {
+                    "release_year": "2018",
+                    "repeats": 5671
+                },
+                {
+                    "release_year": "2017",
+                    "repeats": 5367
+                },
+                {
+                    "release_year": "2016",
+                    "repeats": 3863
+                },
+                {
+                    "release_year": "2015",
+                    "repeats": 2366
+                },
+                {
+                    "release_year": "2014",
+                    "repeats": 1489
+                },
+                {
+                    "release_year": "2026",
+                    "repeats": 1208
+                },
+                {
+                    "release_year": "null",
+                    "repeats": 744
+                },
+                {
+                    "release_year": "2013",
+                    "repeats": 531
+                },
+                {
+                    "release_year": "2012",
+                    "repeats": 267
+                },
+                {
+                    "release_year": "2011",
+                    "repeats": 127
+                },
+                {
+                    "release_year": "2009",
+                    "repeats": 96
+                },
+                {
+                    "release_year": "2010",
+                    "repeats": 56
+                },
+                {
+                    "release_year": "2027",
+                    "repeats": 44
+                },
+                {
+                    "release_year": "2028",
+                    "repeats": 15
+                },
+                {
+                    "release_year": "2008",
+                    "repeats": 12
+                },
+                {
+                    "release_year": "2006",
+                    "repeats": 11
+                },
+                {
+                    "release_year": "2034",
+                    "repeats": 4
+                },
+                {
+                    "release_year": "2007",
+                    "repeats": 2
+                }
+            ]
+        },
+        "mark": "bar",
+        "encoding": {
+            "x": {"field": "release_year", "type": "ordinal"},
+            "y": {"field": "repeats", "type": "quantitative"}
+        }
+    }
+
+    const v3 = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+        "description": "A simple bar chart with embedded data.",
+        "data": {
+            "values": [
+                {
+                    "avg_price": 71000,
+                    "genre_name": "Симуляторы"
+                },
+                {
+                    "avg_price": 46500,
+                    "genre_name": "Инди"
+                },
+                {
+                    "avg_price": 46500,
+                    "genre_name": "Экшены"
+                },
+                {
+                    "avg_price": 5683.605633802817,
+                    "genre_name": "Animation & Modeling"
+                },
+                {
+                    "avg_price": 3632.5555555555557,
+                    "genre_name": "Acción"
+                },
+                {
+                    "avg_price": 2490.3437918215614,
+                    "genre_name": "Simulation"
+                },
+                {
+                    "avg_price": 2442.447383805905,
+                    "genre_name": "Strategy"
+                },
+                {
+                    "avg_price": 2265.948051948052,
+                    "genre_name": "Design & Illustration"
+                },
+                {
+                    "avg_price": 1699,
+                    "genre_name": "Multijogador Massivo"
+                },
+                {
+                    "avg_price": 1680.888888888889,
+                    "genre_name": "Aventura"
+                },
+                {
+                    "avg_price": 1594.724358974359,
+                    "genre_name": "Web Publishing"
+                },
+                {
+                    "avg_price": 1374,
+                    "genre_name": "Ação"
+                },
+                {
+                    "avg_price": 1361.923076923077,
+                    "genre_name": "Game Development"
+                },
+                {
+                    "avg_price": 1324.55,
+                    "genre_name": "Software Training"
+                },
+                {
+                    "avg_price": 1279.948905109489,
+                    "genre_name": "Education"
+                },
+                {
+                    "avg_price": 1132.3666666666666,
+                    "genre_name": "Video Production"
+                },
+                {
+                    "avg_price": 1086.8875,
+                    "genre_name": "Sports"
+                },
+                {
+                    "avg_price": 1044.268073274452,
+                    "genre_name": "RPG"
+                },
+                {
+                    "avg_price": 982.6187315634219,
+                    "genre_name": "Racing"
+                },
+                {
+                    "avg_price": 961.2808896210873,
+                    "genre_name": "Massively Multiplayer"
+                },
+                {
+                    "avg_price": 947.8095238095239,
+                    "genre_name": "Simulação"
+                },
+                {
+                    "avg_price": 896.9699248120301,
+                    "genre_name": "Utilities"
+                },
+                {
+                    "avg_price": 860.562338971659,
+                    "genre_name": "Adventure"
+                },
+                {
+                    "avg_price": 858.2395569620253,
+                    "genre_name": "Action"
+                },
+                {
+                    "avg_price": 829.5869565217391,
+                    "genre_name": "Sexual Content"
+                },
+                {
+                    "avg_price": 813.8781664656212,
+                    "genre_name": "Early Access"
+                },
+                {
+                    "avg_price": 760.4103194103194,
+                    "genre_name": "Indie"
+                },
+                {
+                    "avg_price": 727.0555555555555,
+                    "genre_name": "Nudity"
+                },
+                {
+                    "avg_price": 692.1428571428571,
+                    "genre_name": "Audio Production"
+                }
+            ]
+        },
+        "mark": "bar",
+        "encoding": {
+            "x": {"field": "genre_name", "type": "nominal", "sort": {
+                    "field": "avg_price",
+                    "order": "descending"
+                }},
+            "y": {"field": "avg_price", "type": "quantitative"}
+        }
+    }
+
+    const v4 = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+        "description": "A simple bar chart with embedded data.",
+        "data": {
+            "values": [
+                {
+                    "tag_name": "Single-player",
+                    "count": 17874
+                },
+                {
+                    "tag_name": "Family Sharing",
+                    "count": 14186
+                },
+                {
+                    "tag_name": "Steam Achievements",
+                    "count": 8615
+                },
+                {
+                    "tag_name": "Steam Cloud",
+                    "count": 5129
+                },
+                {
+                    "tag_name": "Full controller support",
+                    "count": 5091
+                },
+                {
+                    "tag_name": "Multi-player",
+                    "count": 4941
+                },
+                {
+                    "tag_name": "Downloadable Content",
+                    "count": 4755
+                },
+                {
+                    "tag_name": "Co-op",
+                    "count": 3185
+                },
+                {
+                    "tag_name": "Partial Controller Support",
+                    "count": 2999
+                },
+                {
+                    "tag_name": "PvP",
+                    "count": 2667
+                }
+            ]
+        },
+        "mark": "bar",
+        "encoding": {
+            "y": {"field": "tag_name", "type": "nominal", "sort": {
+                    "field": "count",
+                    "order": "descending"
+                }},
+            "x": {"field": "count", "type": "quantitative"}
+        }
+    }
+
+
+    // Embed the visualization in the container with id `vis`
+    vegaEmbed('#vis1', v1);
+    vegaEmbed('#vis2', v2);
+    vegaEmbed('#vis3', v3);
+    vegaEmbed('#vis4', v4);
+</script>
+</body>
+</html>
